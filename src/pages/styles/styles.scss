@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "IBM Plex Mono", monospace;
+  ::-webkit-input-placeholder {
+    text-align: right;
+  }
+  input:-moz-placeholder {
+    text-align: right;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+  }
+}
+
+.home {
+  width: 100vw;
+  min-height: 100vh;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background: radial-gradient(
+    163.62% 163.62% at 50% -45.31%,
+    #ef8171 0%,
+    #f9dd56 99.87%
+  );
+
+  .button {
+    padding: 8px 16px;
+    line-height: 24px;
+    margin: 0;
+    border: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #211a15;
+    border-radius: 10px;
+    gap: 8px;
+    cursor: pointer;
+  }
+  .button-unselected {
+    padding: 8px 16px;
+    line-height: 24px;
+    margin: 0;
+    border: 0;
+    font-size: 16px;
+    font-weight: regular;
+    color: #211a15;
+    background: none;
+    border-radius: 10px;
+    gap: 8px;
+    cursor: pointer;
+  }
+}
