@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styles from "./Dashboard_Tab.module.scss";
 import Image from "next/image";
 import {
-  approveToken,
   getDashboardStats,
   getTokenBalance,
   getAllowance,
@@ -49,6 +48,8 @@ const DashboardTab = (props) => {
       return (
         Math.round((dashboardStats.totalReserve / tokenBalance) * 100) / 100
       ).toFixed(1);
+    } else {
+      return "-";
     }
   };
 
@@ -74,7 +75,9 @@ const DashboardTab = (props) => {
     (async () => {
       setDashboardStats(await getDashboardStats(selectedToken.pool));
       setTokenBalance(await getTokenBalance(account, selectedToken.address));
-      setAllowance(await getAllowance(selectedToken.address, account));
+      /*     setAllowance(
+        await getAllowance(account, selectedToken.pool, selectedToken.address)
+      ); */
     })();
   }, [account, selectedToken, setDashboardStats]);
 

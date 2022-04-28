@@ -82,12 +82,18 @@ export const getDashboardStats = async (poolAddress) => {
   }
 };
 
-export const approveToken = async (tokenAddress, walletAddress) => {
+export const approveToken = async (
+  tokenAddress,
+  poolAddress,
+  walletAddress
+) => {
   if (tokenAddress !== undefined && walletAddress !== undefined) {
     let web3 = new Web3(window.ethereum);
+    const wei = 1e18 * 999;
+    const allowanceAmount = BigNumber.from(String(wei));
     var tokenContract = await new web3.eth.Contract(ERC20ABI, tokenAddress);
     await tokenContract.methods
-      .approve(walletAddress, 100000000000)
+      .approve(poolAddress, allowanceAmount)
       .send({ from: walletAddress });
   }
 };
@@ -123,13 +129,19 @@ export const withdraw = async (poolAddress, walletAddress, amount) => {
   }
 };
 
-export const getAllowance = async (tokenAddress, walletAddress) => {
+export const getAllowance = async (
+  walletAddress,
+  poolAddress,
+  tokenAddress
+) => {
   if (tokenAddress !== undefined && walletAddress !== undefined) {
     let web3 = new Web3(window.ethereum);
     var tokenContract = await new web3.eth.Contract(ERC20ABI, tokenAddress);
     let allowance = await tokenContract.methods
-      .allowance(walletAddress, walletAddress)
+      .allowance(walletAddress, poolAddress)
       .call();
+    console.log("Allowance is " + allowance / 1e18);
+
     return allowance;
   }
 };

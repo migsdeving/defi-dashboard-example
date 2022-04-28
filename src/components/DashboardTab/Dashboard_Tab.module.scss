@@ -1,22 +1,13 @@
 .section {
-  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
+  padding-bottom: 150px;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-}
-
-.selector {
-  display: inline-flex;
-  max-width: fit-content;
-  border: 4px solid #211a15;
-  padding: 10px 12px;
-  border-radius: 10px;
-  margin-bottom: 20px;
 }
 
 .display {
@@ -27,7 +18,6 @@
   background-color: #211a15;
   max-width: 500px;
   min-width: none;
-
   border-radius: 10px;
 }
 

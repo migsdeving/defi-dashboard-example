@@ -11,7 +11,7 @@ import {
 } from "blockchain/utils";
 
 const PoolTab = (props) => {
-  const { poolStats, account, onWalletConnect, setPoolStats, tab } = props;
+  const { poolStats, setPoolStats, account, onWalletConnect, tab } = props;
   const [amount, setAmount] = useState();
   const [selectedToken, setSelectedToken] = useState(
     TOKENS.find((token) => token.name === "UNI")
@@ -45,7 +45,7 @@ const PoolTab = (props) => {
     if (!account) {
       return "CONNECT TO A WALLET";
     } else {
-      if (allowance > 0 && amount > 0) {
+      if (allowance > 1e18) {
         return "DEPOSIT";
       } else {
         return "APPROVE";
@@ -57,11 +57,13 @@ const PoolTab = (props) => {
     if (!account) {
       onWalletConnect();
     } else {
-      if (allowance > 0) {
+      if (allowance > 1e18) {
         await deposit(selectedToken.pool, account, amount);
       } else {
-        await approveToken(selectedToken.address, account);
-        setAllowance(await getAllowance(selectedToken.address, account));
+        await approveToken(selectedToken.address, selectedToken.pool, account);
+        setAllowance(
+          await getAllowance(account, selectedToken.pool, selectedToken.address)
+        );
       }
     }
   };
@@ -70,7 +72,9 @@ const PoolTab = (props) => {
     (async () => {
       setPoolStats(await getPoolStats(selectedToken.pool));
       setTokenBalance(await getTokenBalance(account, selectedToken.address));
-      setAllowance(await getAllowance(selectedToken.address, account));
+      setAllowance(
+        await getAllowance(account, selectedToken.pool, selectedToken.address)
+      );
     })();
   }, [account, selectedToken, setPoolStats]);
 
@@ -80,10 +84,6 @@ const PoolTab = (props) => {
       style={tab === "pool" ? { display: "flex" } : { display: "none" }}
     >
       <div className={styles.container}>
-        {/*  <section className={styles.selector}>
-          <button className="button"> Pool</button>
-          <button className="button-unselected"> Dashboard</button>
-        </section> */}
         <section className={styles.display}>
           pal{selectedToken.name} Pool
           <section className={styles.brownBox}>
