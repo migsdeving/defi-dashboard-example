@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <div className="home">
       <Head>
-        <title>Defi Dashboard Example</title>
+        <title>Defi Dashboard</title>
         <meta
           name="description"
           content="Technical Assessment for the Junior Frontend Developer Position at Paladin"
