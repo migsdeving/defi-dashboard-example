@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <div className="home">
       <Head>
-        <title>Paladin Technical Assessment</title>
+        <title>Defi Dashboard Example</title>
         <meta
           name="description"
           content="Technical Assessment for the Junior Frontend Developer Position at Paladin"
